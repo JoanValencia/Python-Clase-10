@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Students</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/default.css') }}">
+</head>
+<body>
+   <nav>
+      <a href = "{{ url_for('show_all') }}">Show All Student</a> |
+      <a href = "{{ url_for('new') }}">Add Student</a> |
+	  <a href = "{{ url_for('upload_file') }}">Load List</a>
+
+   </nav>
+      <section>
+      <h3>Students</h3>
+
+      {%- for category, message in get_flashed_messages(with_categories = true) %}
+         <div class = "alert alert-danger">
+            {{ message }}
+         </div>
+      {%- endfor %}
+
+      <form action = "{{ request.path }}" method = "post">
+		<table>
+			 <tr><td><label for = "name">Name</label></td>
+			 <td><input type = "text" name = "name" placeholder = "Name" /></td></tr>
+			 <tr><td><label for = "email">City</label></td>
+			 <td><input type = "text" name = "city" placeholder = "city" /></td></tr>
+			 <tr><td><label for = "addr">Addr</label></td>
+			 <td><textarea name = "addr" placeholder = "addr"></textarea></td></tr>
+			 <tr><td><label for = "PIN">PIN</label></td>
+			 <td><input type = "text" name = "pin" placeholder = "pin" /></td></tr>
+		</table><br>	 
+		<input type = "submit" value = "Submit" />
+		 
+      </form>
+    </section>
+	<section>
+		<h3>List</h3>
+		<form action="/uploader" method="POST" enctype="multipart/form-data">
+			<input type="file" name="file" />
+			<input type="submit" value="Send List" />
+		</form>
+	</section>	
+   </body>
+</html>
